@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attiva Ratio — Ratio Launch Week</title>
+<!-- RATIO — Box attivazione (carrello): scegli zona + piano → link Stripe corretto con coupon LANCIO50
+     PLACEHOLDER: i link Stripe sono nel blocco PLANS; la deadline countdown è in COUPON_DEADLINE -->
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+ --r-blue:#0A2540;--r-blue-soft:#1A3556;--r-yellow:#FFC629;--r-yellow-hov:#FFB800;
+ --r-surface:#FFFFFF;--r-text:#0A2540;--r-muted:#5A6C7D;
+ --r-border:#E5E9EE;--r-border-strong:#C9D2DC;--r-success:#00875A;--r-danger:#DE350B;
+}
+html,body{margin:0;padding:0}
+body{
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Inter",Roboto,Arial,sans-serif;
+ color:var(--r-text);background:#EEF2F6;line-height:1.5;-webkit-font-smoothing:antialiased;
+ min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 16px}
+.r-wrap{width:100%;max-width:460px}
+.r-head{text-align:center;margin-bottom:18px}
+.r-brand{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:20px;letter-spacing:-.01em;color:var(--r-blue)}
+.r-brand-mark{width:30px;height:30px;border-radius:7px;background:var(--r-blue);color:var(--r-yellow);display:grid;place-items:center;font-weight:800;font-size:15px}
+.r-promo-pill{display:inline-block;margin-top:12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--r-blue);background:var(--r-yellow);padding:5px 12px;border-radius:999px}
+.r-head h1{font-size:21px;font-weight:700;color:var(--r-blue);margin:14px 0 4px;letter-spacing:-.01em}
+.r-head p{font-size:14px;color:var(--r-muted);margin:0}
+.r-activate{background:var(--r-surface);padding:24px;border:1px solid var(--r-border);border-radius:14px;text-align:left;box-shadow:0 18px 40px -24px rgba(10,37,64,.4)}
+.r-field-label{display:block;font-size:13px;font-weight:600;color:var(--r-blue);margin:0 0 6px;text-transform:uppercase;letter-spacing:.08em}
+.r-select{width:100%;border:1px solid var(--r-border);border-radius:8px;padding:12px 14px;font:inherit;font-size:15px;color:var(--r-text);background:var(--r-surface) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'><path fill='%230A2540' d='M6 8L2 4h8z'/></svg>") no-repeat right 14px center;background-size:12px;appearance:none;-webkit-appearance:none;cursor:pointer;margin-bottom:16px}
+.r-select:focus{outline:none;border-color:var(--r-blue);box-shadow:0 0 0 3px rgba(10,37,64,.08)}
+.r-toggle{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--r-border);border-radius:8px;overflow:hidden;margin-bottom:14px}
+.r-toggle-btn{background:var(--r-surface);border:none;padding:14px 10px;font:inherit;font-size:14px;font-weight:600;color:var(--r-muted);cursor:pointer;transition:all .15s ease;text-align:center;line-height:1.3}
+.r-toggle-btn:not(:last-child){border-right:1px solid var(--r-border)}
+.r-toggle-btn.is-active{background:var(--r-blue);color:var(--r-yellow)}
+.r-toggle-btn .r-toggle-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 6px;border-radius:999px;background:var(--r-yellow);color:var(--r-blue);margin-left:6px;letter-spacing:.04em}
+.r-price{padding:14px 16px;background:#F4F7FB;border-radius:8px;margin-bottom:16px;text-align:center}
+.r-price-strike{font-size:15px;font-weight:600;color:var(--r-muted);text-decoration:line-through;margin-right:8px}
+.r-price-main{font-size:24px;font-weight:800;color:var(--r-blue);letter-spacing:-.01em}
+.r-price-main small{font-size:14px;font-weight:600;color:var(--r-muted)}
+.r-price-promo{display:inline-block;font-size:10px;font-weight:700;padding:3px 8px;border-radius:999px;background:var(--r-yellow);color:var(--r-blue);letter-spacing:.06em;text-transform:uppercase;margin-top:6px}
+.r-price-sub{font-size:12px;color:var(--r-muted);margin-top:6px;line-height:1.4}
+.r-price-sub strong{color:var(--r-success)}
+.r-cta-final{width:100%;padding:16px;font-size:16px;background:var(--r-blue);color:var(--r-yellow);border:none;border-radius:8px;font-weight:700;cursor:pointer;transition:all .15s ease;text-decoration:none;display:block;text-align:center}
+.r-cta-final:hover:not(.is-disabled){background:var(--r-blue-soft)}
+.r-cta-final.is-disabled{background:var(--r-border-strong);color:var(--r-surface);cursor:not-allowed;pointer-events:none}
+.r-countdown{margin-top:16px;text-align:center}
+.r-cd-title{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--r-muted);font-weight:700;margin-bottom:8px}
+.r-cd-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;max-width:280px;margin:0 auto}
+.r-cd-block{background:var(--r-blue);color:var(--r-yellow);border-radius:6px;padding:8px 4px;line-height:1}
+.r-cd-num{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.r-cd-lab{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--r-yellow);opacity:.85;margin-top:4px;font-weight:600}
+.r-cd-deadline{font-size:11px;color:var(--r-muted);margin-top:8px}
+.r-cd-expired{font-size:13px;color:var(--r-danger);font-weight:700;text-align:center;margin-top:8px}
+.r-trust{text-align:center;font-size:12px;color:var(--r-muted);margin-top:14px;display:flex;align-items:center;justify-content:center;gap:7px}
+.r-trust svg{width:14px;height:14px;stroke:var(--r-success);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:420px){
+ body{padding:16px 10px}
+ .r-activate{padding:18px 14px}
+ .r-toggle-btn .r-toggle-badge{font-size:9px;padding:1px 5px}
+ .r-price-main{font-size:22px}
+ .r-cd-num{font-size:17px}
+}
+</style>
+</head>
+<body>
+<div class="r-wrap">
+ <div class="r-head">
+  <img src="assets/ratio-logo-dark.png" alt="Ratio" style="height:30px;width:auto;display:inline-block;vertical-align:middle">
+  <div class="r-promo-pill">Ratio Launch Week · −50%</div>
+  <h1>Attiva Ratio</h1>
+  <p>Scegli zona e piano: lo sconto LANCIO50 è già applicato.</p>
+ </div>
+
+ <div class="r-activate">
+  <label class="r-field-label" for="r-zone">Zona</label>
+  <select class="r-select" id="r-zone">
+   <option value="">— Scegli la tua zona —</option>
+   <option value="nord">Nord — 8 regioni</option>
+   <option value="centro">Centro — 6 regioni</option>
+   <option value="sud">Sud — 6 regioni</option>
+  </select>
+
+  <label class="r-field-label">Piano</label>
+  <div class="r-toggle" role="group">
+   <button type="button" class="r-toggle-btn" data-plan="m">Mensile</button>
+   <button type="button" class="r-toggle-btn is-active" data-plan="a">Annuale <span class="r-toggle-badge">-38%</span></button>
+  </div>
+
+  <div class="r-price" id="r-price">
+   <div class="r-price-main"><span class="r-price-strike" id="r-price-strike">€217</span><span id="r-price-amount">€108</span><small>/mese</small></div>
+   <div class="r-price-promo">50% per 3 mesi · LANCIO50</div>
+   <div class="r-price-sub" id="r-price-sub">poi €217/mese · annuale €2.600 (<strong>risparmi €1.600</strong>)</div>
+  </div>
+
+  <a class="r-cta-final is-disabled" id="r-cta-checkout" href="#" aria-disabled="true">Scegli prima la zona</a>
+
+  <div class="r-trust">
+   <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11.5 14.5 15.5 9.5"/></svg>
+   Pagamento sicuro con Stripe · disdici quando vuoi
+  </div>
+
+  <div class="r-countdown" id="r-countdown">
+   <div class="r-cd-title">Promo valida per altri</div>
+   <div class="r-cd-grid">
+    <div class="r-cd-block"><div class="r-cd-num" id="r-cd-d">00</div><div class="r-cd-lab">giorni</div></div>
+    <div class="r-cd-block"><div class="r-cd-num" id="r-cd-h">00</div><div class="r-cd-lab">ore</div></div>
+    <div class="r-cd-block"><div class="r-cd-num" id="r-cd-m">00</div><div class="r-cd-lab">min</div></div>
+    <div class="r-cd-block"><div class="r-cd-num" id="r-cd-s">00</div><div class="r-cd-lab">sec</div></div>
+   </div>
+   <div class="r-cd-deadline">Scade il 30 giugno · ore 23:59</div>
+  </div>
+ </div>
+</div>
+
+<script>
+(function(){'use strict';
+const COUPON_CODE='LANCIO50';
+// Link Stripe per zona × piano (m=mensile, a=annuale)
+const PLANS={
+ nord:  {m:{link:'https://buy.stripe.com/aFa00l65356k6NqfpW8IU0e'}, a:{link:'https://buy.stripe.com/3cI14paljbuI7Rub9G8IU0f'}},
+ centro:{m:{link:'https://buy.stripe.com/00wfZjdxvcyM2xa2Da8IU0g'}, a:{link:'https://buy.stripe.com/cNi6oJgJHdCQdbO6Tq8IU0h'}},
+ sud:   {m:{link:'https://buy.stripe.com/28E7sN797cyMb3G7Xu8IU0i'}, a:{link:'https://buy.stripe.com/eVq8wR9hf8iw9ZCdhO8IU0j'}}
+};
+function uuid(){return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,c=>(c^crypto.getRandomValues(new Uint8Array(1))[0]&15>>c/4).toString(16));}
+const sessionId=uuid();
+let selectedZone='', selectedPlan='a';
+function fmtEUR(n){return '€'+Number(n).toLocaleString('it-IT');}
+function updateCTA(){
+ const priceEl=document.getElementById('r-price-amount');
+ const strikeEl=document.getElementById('r-price-strike');
+ const subEl=document.getElementById('r-price-sub');
+ const cta=document.getElementById('r-cta-checkout');
+ if(selectedPlan==='a'){
+  strikeEl.textContent=fmtEUR(217); priceEl.textContent=fmtEUR(108);
+  subEl.innerHTML='poi €217/mese · annuale €2.600 (<strong>risparmi €1.600</strong>)';
+ } else {
+  strikeEl.textContent=fmtEUR(350); priceEl.textContent=fmtEUR(175);
+  subEl.innerHTML='poi €350/mese · disdici quando vuoi';
+ }
+ if(!selectedZone){
+  cta.classList.add('is-disabled'); cta.setAttribute('aria-disabled','true');
+  cta.textContent='Scegli prima la zona'; cta.href='#'; return;
+ }
+ const planData=(PLANS[selectedZone]||{})[selectedPlan];
+ if(!planData) return;
+ const sep=planData.link.indexOf('?')>-1?'&':'?';
+ cta.href=planData.link+sep+'prefilled_promo_code='+COUPON_CODE+'&client_reference_id='+sessionId;
+ cta.classList.remove('is-disabled'); cta.removeAttribute('aria-disabled');
+ cta.textContent='Attiva Ratio '+(selectedPlan==='a'?'Annuale':'Mensile')+' →';
+}
+const zoneSel=document.getElementById('r-zone');
+zoneSel.addEventListener('change',()=>{selectedZone=zoneSel.value;updateCTA();});
+document.querySelectorAll('.r-toggle-btn').forEach(btn=>{
+ btn.addEventListener('click',()=>{
+  document.querySelectorAll('.r-toggle-btn').forEach(b=>b.classList.remove('is-active'));
+  btn.classList.add('is-active'); selectedPlan=btn.dataset.plan; updateCTA();
+ });
+});
+document.getElementById('r-cta-checkout').addEventListener('click',function(e){
+ if(this.classList.contains('is-disabled')) e.preventDefault();
+});
+// Countdown — PLACEHOLDER: imposta la scadenza reale della Ratio Launch Week
+const COUPON_DEADLINE=new Date('2026-06-30T23:59:00+02:00').getTime();
+function pad(n){return n<10?'0'+n:''+n;}
+function tick(){
+ const cd=document.getElementById('r-countdown'); if(!cd) return;
+ const diff=COUPON_DEADLINE-Date.now();
+ if(diff<=0){cd.innerHTML='<div class="r-cd-expired">Promo scaduta</div>';return;}
+ const d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
+ document.getElementById('r-cd-d').textContent=pad(d);
+ document.getElementById('r-cd-h').textContent=pad(h);
+ document.getElementById('r-cd-m').textContent=pad(m);
+ document.getElementById('r-cd-s').textContent=pad(s);
+}
+tick(); setInterval(tick,1000);
+updateCTA();
+})();
+</script>
+</body>
+</html>

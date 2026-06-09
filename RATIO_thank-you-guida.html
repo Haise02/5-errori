@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grazie! La tua guida è in arrivo — Ratio</title>
+<meta name="robots" content="noindex">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1626; --navy-2:#0F1B2D; --ink:#0C1420;
+    --paper:#FBFAF6; --amber:#F4B324; --amber-d:#E0A013; --amber-deep:#9A6B00;
+    --green:#1FA463; --green-soft:#46E08A;
+    --fg:#3A4757; --fg-strong:#0C1420; --fg-dim:#697787;
+    --bdr:rgba(12,20,32,.10);
+    --disp:'Bricolage Grotesque', Georgia, serif;
+    --sans:'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--sans);color:var(--fg);background:
+      radial-gradient(50% 40% at 88% -6%, rgba(244,179,36,.18), transparent 60%),
+      radial-gradient(46% 40% at 0% 104%, rgba(46,91,184,.10), transparent 60%),
+      linear-gradient(180deg,#FBFAF6,#F1EFE8);
+    min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.6;font-variant-numeric:tabular-nums}
+  .ic{width:1em;height:1em;display:inline-block;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+  .wrap{max-width:680px;margin:0 auto;padding:26px 20px 56px}
+  .nav{display:flex;justify-content:center;margin-bottom:30px}
+  .nav img{height:26px}
+
+  .hero{text-align:center}
+  .check{width:74px;height:74px;margin:0 auto 22px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:36px;
+    box-shadow:0 16px 38px -14px rgba(31,164,99,.7);animation:pop .5s var(--ease) both}
+  @keyframes pop{0%{transform:scale(.5);opacity:0}60%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+  h1{font-family:var(--disp);font-weight:800;font-size:clamp(28px,5vw,42px);line-height:1.06;letter-spacing:-.025em;color:var(--fg-strong);margin-bottom:12px}
+  .sub{font-size:clamp(15.5px,2.2vw,18px);color:var(--fg);max-width:520px;margin:0 auto 8px}
+  .sub b{color:var(--fg-strong);font-weight:700}
+  .spam{font-size:13.5px;color:var(--fg-dim);margin-bottom:26px}
+
+  .card{background:#fff;border:1px solid var(--bdr);border-radius:20px;padding:26px;box-shadow:0 24px 60px -34px rgba(20,30,48,.5);margin-bottom:22px}
+  .dl{display:grid;grid-template-columns:120px 1fr;gap:22px;align-items:center;text-align:left}
+  @media(max-width:520px){.dl{grid-template-columns:1fr;text-align:center;justify-items:center}}
+  .dl .cover{width:120px;border-radius:10px;overflow:hidden;box-shadow:0 18px 34px -18px rgba(0,0,0,.5)}
+  .dl .cover img{width:100%;display:block}
+  .dl h2{font-family:var(--disp);font-weight:800;font-size:19px;color:var(--fg-strong);margin-bottom:5px;letter-spacing:-.01em}
+  .dl p{font-size:14px;color:var(--fg-dim);margin-bottom:14px}
+  .btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--sans);font-weight:700;font-size:15.5px;color:#1c1500;background:linear-gradient(180deg,#FFD659,var(--amber));border:none;border-radius:11px;padding:14px 22px;cursor:pointer;text-decoration:none;box-shadow:0 12px 26px -10px rgba(244,179,36,.85);transition:transform .12s var(--ease),box-shadow .2s,filter .2s}
+  .btn .ic{font-size:18px;transition:transform .25s var(--ease)}
+  .btn:hover{transform:translateY(-2px);filter:brightness(1.04);box-shadow:0 18px 36px -12px rgba(244,179,36,.95)}
+  .btn:hover .ic{transform:translateY(2px)}
+
+  .bridge{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--navy-2),var(--navy));border-radius:22px;padding:32px 28px;text-align:center;color:#fff}
+  .bridge .glow{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(244,179,36,.26),transparent 70%);top:-150px;left:50%;transform:translateX(-50%);pointer-events:none}
+  .bridge .badge{position:relative;display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--amber);background:rgba(244,179,36,.14);border:1px solid rgba(244,179,36,.3);padding:6px 13px;border-radius:999px;margin-bottom:16px}
+  .bridge h2{position:relative;font-family:var(--disp);font-weight:800;font-size:clamp(22px,3.6vw,30px);line-height:1.1;letter-spacing:-.02em;color:#fff;margin-bottom:10px}
+  .bridge h2 .am{color:var(--amber)}
+  .bridge p{position:relative;font-size:15.5px;color:#C9D6EE;max-width:460px;margin:0 auto 18px}
+  .bridge .price{position:relative;display:inline-flex;align-items:center;gap:11px;margin-bottom:18px}
+  .bridge .price .old{position:relative;font-family:var(--disp);font-weight:800;font-size:24px;color:#7E8EA4}
+  .bridge .price .old::after{content:"";position:absolute;left:-2px;right:-2px;top:50%;height:2.5px;background:#FF8E8C;transform:rotate(-9deg);border-radius:2px}
+  .bridge .price .arrow{color:#7E8EA4;font-weight:700}
+  .bridge .price .free{font-family:var(--disp);font-weight:800;font-size:24px;color:var(--green-soft)}
+  .bridge .coupon{position:relative;display:inline-flex;align-items:center;gap:9px;font-size:13.5px;color:#C9D6EE;margin-bottom:20px}
+  .bridge .coupon b{font-family:var(--disp);font-size:15px;color:#fff;letter-spacing:.06em;background:rgba(255,255,255,.08);border:1px dashed rgba(255,255,255,.4);padding:3px 12px;border-radius:8px}
+  .bridge .btn{position:relative}
+
+  .foot{text-align:center;margin-top:30px;font-size:13px;color:var(--fg-dim)}
+  .foot b{color:var(--fg-strong);font-weight:700}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="nav"><img src="assets/ratio-logo-dark.png" alt="Ratio"></div>
+
+    <div class="hero">
+      <div class="check"><svg class="ic" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <h1>Grazie. La tua guida è in arrivo.</h1>
+      <p class="sub">Ti abbiamo inviato <b>«5 errori che ti fanno perdere un affare»</b> via email. Arriva entro un paio di minuti.</p>
+      <p class="spam">Non la vedi? Controlla le cartelle <b>Spam</b> o <b>Promozioni</b>.</p>
+    </div>
+
+    <div class="card">
+      <div class="dl">
+        <div class="cover"><img src="assets/ratio-guida-cover.png" alt="Copertina della guida 5 Errori"></div>
+        <div>
+          <h2>Scaricala subito</h2>
+          <p>Non aspettare l'email: apri la guida in PDF adesso.</p>
+          <!-- Guida ospitata su Google Drive -->
+          <a class="btn" href="https://drive.google.com/file/d/15uH_FOvCWHnwEOFS-NSUh2C3H0GCIfqt/view?usp=sharing" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Scarica la guida (PDF)</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="bridge">
+      <div class="glow"></div>
+      <div class="badge"><svg class="ic" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"/></svg>Ratio Launch Week</div>
+      <h2>La guida ti dà il metodo.<br><span class="am">Ratio lo fa per te.</span></h2>
+      <p>Mentre la leggi, attiva Ratio: ogni mattina la classifica degli annunci per scostamento dallo Street Price, in tutta Italia.</p>
+      <div class="price"><span class="old">prezzo pieno</span><span class="arrow">&rarr;</span><span class="free">&minus;50%</span></div>
+      <div class="coupon">Sconto già applicato &middot; codice <b>LANCIO50</b></div>
+      <br>
+      <a class="btn" href="https://ld-group.it/ratio-event-promo/" target="_blank" rel="noopener">Attiva Ratio con il 50% di sconto <svg class="ic" viewBox="0 0 24 24"><line x1="4" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+
+    <div class="foot"><b>Ratio</b> — Il migliore affare, già in cima.</div>
+  </div>
+</body>
+</html>
